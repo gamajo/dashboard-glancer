@@ -16,7 +16,7 @@ This isn't a WordPress plugin on its own, so the usual instructions don't apply.
   ~~~php
   // Require the new class (change to your correct path)
   if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) ) {
-      require plugin_dir_path( 'include/class-gamajo-dashboard-glancer.php' );
+      require plugin_dir_path( 'includes/class-gamajo-dashboard-glancer.php' );
   }
   ~~~
 
@@ -62,6 +62,21 @@ Remember, that code above shows lots of examples of how you can add multiple pos
 ## Notes
 
 The textual label is taken from the custom post type registration itself. It will use the singular label (e.g. _Story_) if the count is exactly 1, or the plural name (e.g. _Stories_) otherwise. If the status is not `publish`, then it will append the status to disambiguate. If the item count is zero, then nothing will show up, to keep visual clutter to a minimum.
+
+The class will automatically output any items still registered, at priority 20 of the `dashboard_glance_items` action hook. If you want to output at an earlier priority, then just call the `show()` method on the object that has the items registered, when hooked in to that earlier priority (here, 8):
+
+~~~php
+add_action( 'dashboard_glance_items', 'prefix_add_dashboard_counts', 8 );
+function prefix_add_dashboard_counts() {
+    $glancer = new Gamajo_Dashboard_Glancer;
+    $glancer->add( 'my_cpt' ); // show only published "my-cpt" entries
+    $glancer->show();
+}
+~~~
+
+Once `show()` is called, all registered items become unregistered, so that `show()` being called again (at priority 20, or manually) will not result in duplicate items showing on the widget.
+
+The class is not a singleton, so if you add items in one function, but want to show early in another, you'll need to pass the object across, likely via a global variable. As a non-singleton, you could also register some items to show early, and some to show late, by instantiating two objects from the `Gamajo_Dashboard_Glancer` class, but only explicitly calling `show()` on one of them.
 
 ## Contributions
 
