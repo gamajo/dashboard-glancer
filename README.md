@@ -78,6 +78,19 @@ Once `show()` is called, all registered items become unregistered, so that `show
 
 The class is not a singleton, so if you add items in one function, but want to show early in another, you'll need to pass the object across, likely via a global variable. As a non-singleton, you could also register some items to show early, and some to show late, by instantiating two objects from the `Gamajo_Dashboard_Glancer` class, but only explicitly calling `show()` on one of them.
 
+## Backwards Compatibility for WP 3.7 Right Now Widget
+
+This project also includes the [`Gamajo_Dashboard_RightNow`](class-gamajo-dashboard-widget-rightnow.php) class which is an extension of the main `Gamajo_Dashboard_Glancer` class. This can be instantiated and added to within a function hooked to the `right_now_content_table_end` hook, to provide the same information in the WordPress 3.7 Right Now widget.
+
+~~~php
+// Hook into the widget (or any hook before it!) to register your items.
+add_action( 'right_now_content_table_end', 'prefix_add_dashboard_counts_old' );
+function prefix_add_dashboard_counts_old() {
+    $glancer = new Gamajo_Dashboard_RightNow;
+    $glancer->add( 'my_cpt' ); // show only published "my-cpt" entries
+}
+~~~
+
 ## Contributions
 
 Contributions are welcome - fork, fix and send pull requests against the `develop` branch please.
