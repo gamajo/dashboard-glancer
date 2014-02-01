@@ -2,6 +2,8 @@
 
 A class to copy into your WordPress plugin, to make adding custom post type counts to the _At a Glance_ dashboard widget considerably easier.
 
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/GaryJones/Gamajo-Dashboard-Glancer/badges/quality-score.png?s=543e04781b27f58b1e37ba742f760c0c5ba82297)](https://scrutinizer-ci.com/g/GaryJones/Gamajo-Dashboard-Glancer/)
+
 ## Description
 
 WordPress 3.8 introduced the _At a Glance_ dashboard widget, as a replacement for the _Right Now_ widget. The new widget contains an action hook, `dashboard_glance_items`, which allows developers to insert extra list items into the widget. Although grabbing the number of entries of a certain post type, and maybe a specific status within that post type, and displaying within markup is not tricky, it can't be done as minimally as what this class allows. Add in the desire for wanting to include counts for multiple post types, or multiple statuses, and this class comes into its own. See the Usage section for how simple the code is.
