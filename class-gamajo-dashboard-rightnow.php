@@ -7,6 +7,7 @@
  * @link      http://gamajo.com/dashboard-glancer
  * @copyright 2013 Gary Jones, Gamajo Tech
  * @license   GPL-2.0+
+ * @version   1.0.0
  */
 
 /**
