@@ -17,12 +17,12 @@
  * @author  Gary Jones
  */
 class Gamajo_Dashboard_RightNow extends Gamajo_Dashboard_Glancer {
-
 	/**
 	 * Automatically show any registered items.
 	 *
-	 * With this, there's no need to explicitly call show() during the dashboard_glance_items hook,
-	 * and items can be registered at any time before dashboard_glance_items priority 20 (including on earlier hooks).
+	 * With this, there's no need to explicitly call show() during the
+	 * `dashboard_glance_items` hook, and items can be registered at any time
+	 * before `dashboard_glance_items` priority 20 (including on earlier hooks).
 	 *
 	 * @since 1.0.0
 	 */
@@ -37,8 +37,7 @@ class Gamajo_Dashboard_RightNow extends Gamajo_Dashboard_Glancer {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array $item Registered item.
-	 *
+	 * @param array $item Registered item.
 	 * @return string Markup, or empty string if item count is zero.
 	 */
 	protected function get_single_item( array $item ) {
@@ -49,21 +48,25 @@ class Gamajo_Dashboard_RightNow extends Gamajo_Dashboard_Glancer {
 			return '';
 		}
 
-		$href  = $this->get_link_url( $item );
-		$num   = $this->maybe_link( number_format_i18n( $count ), $href );
-		$text  = $this->maybe_link( $this->get_label( $item, $count ), $href );
+		$href = $this->get_link_url( $item );
+		$num  = $this->maybe_link( number_format_i18n( $count ), $href );
+		$text = $this->maybe_link( $this->get_label( $item, $count ), $href );
+
 		return $this->get_markup( $num . '|' . $text, $item['type'] );
 	}
 
 	/**
-	 * Wrap number and text within list item markup.
+	 * Wrap number and text within table row markup.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $text   Text to display. May be wrapped in a link.
+	 * @param string $text Text to display. May be wrapped in a link.
+	 * @param string $post_type Post type.
+	 * @return string Markup for list item.
 	 */
 	protected function get_markup( $text, $post_type ) {
 		$text_parts = explode( '|', $text );
+
 		return '<tr>
 			<td class="first b ' . sanitize_html_class( 'b-' . $post_type ) . '">' . $text_parts[0] . '</td>
 			<td class="t ' . sanitize_html_class( $post_type ) . '">' . $text_parts[1] . '</td>
