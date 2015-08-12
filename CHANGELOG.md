@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
-_No changes._
+- Fix regression in 1.0.1 for labels.
 
 ## [1.0.1] - 2015-08-12
 

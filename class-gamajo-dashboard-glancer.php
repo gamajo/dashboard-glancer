@@ -144,7 +144,7 @@ class Gamajo_Dashboard_Glancer {
 	 */
 	protected function get_label( array $item, $count ) {
 		$post_type_object = get_post_type_object( $item['type'] );
-		$labels           = $post->labels;
+		$labels           = $post_type_object->labels;
 		$label            = 1 === $count ? $labels->singular_name : $labels->name;
 
 		// Append status for non-publish statuses for disambiguation.
