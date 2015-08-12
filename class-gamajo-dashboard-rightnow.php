@@ -42,7 +42,7 @@ class Gamajo_Dashboard_RightNow extends Gamajo_Dashboard_Glancer {
 	 */
 	protected function get_single_item( array $item ) {
 		$num_posts = wp_count_posts( $item['type'] );
-		$count = $num_posts->$item['status'];
+		$count = $num_posts->{$item['status']};
 
 		if ( ! $count ) {
 			return '';
