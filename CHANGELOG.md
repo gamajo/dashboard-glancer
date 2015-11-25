@@ -20,6 +20,6 @@ _No changes._
 
 - Initial release.
 
-[unreleased]: https://github.com/GaryJones/Gamajo-Dashboard-Glancer/compare/1.0.0...HEAD
+[unreleased]: https://github.com/GaryJones/Gamajo-Dashboard-Glancer/compare/1.0.2...HEAD
 [1.0.2]: https://github.com/GaryJones/Gamajo-Dashboard-Glancer/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/GaryJones/Gamajo-Dashboard-Glancer/compare/1.0.0...1.0.1
