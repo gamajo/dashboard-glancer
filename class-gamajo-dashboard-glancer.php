@@ -7,7 +7,7 @@
  * @link      http://gamajo.com/dashboard-glancer
  * @copyright 2013 Gary Jones, Gamajo Tech
  * @license   GPL-2.0+
- * @version   1.0.2
+ * @version   1.0.3
  */
 
 /**
@@ -22,7 +22,7 @@ class Gamajo_Dashboard_Glancer {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @type array
+	 * @var array
 	 */
 	protected $items;
 
@@ -37,6 +37,7 @@ class Gamajo_Dashboard_Glancer {
 	 */
 	public function __construct() {
 		add_action( 'dashboard_glance_items', array( $this, 'show' ), 20 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'dashboard_css' ) );
 	}
 
 	/**
@@ -55,6 +56,7 @@ class Gamajo_Dashboard_Glancer {
 		// If relevant output action hook has already passed, then no point in proceeding.
 		if ( did_action( 'dashboard_glance_items' ) ) {
 			_doing_it_wrong( __CLASS__, 'Trying to add At a Glance items to dashboard widget afterhook already fired', '1.0.0' );
+
 			return;
 		}
 
@@ -178,14 +180,16 @@ class Gamajo_Dashboard_Glancer {
 	 */
 	protected function maybe_link( $text, $href ) {
 		if ( current_user_can( 'edit_posts' ) ) {
-			return '<a href="' . esc_url( $href ) . '">' . $text . '</a>';
+			return '<a href="' . esc_url( $href ) . '">' . esc_html( $text ) . '</a>';
 		}
 
-		return $text;
+		return '<span>' . esc_html( $text ) . '</span>';
 	}
 
 	/**
 	 * Wrap number and text within list item markup.
+	 *
+	 * The extra work for populating classes is to provide dashicons support.
 	 *
 	 * @since 1.0.0
 	 *
@@ -194,6 +198,48 @@ class Gamajo_Dashboard_Glancer {
 	 * @return string Markup for list item.
 	 */
 	protected function get_markup( $text, $post_type ) {
-		return '<li class="' . sanitize_html_class( $post_type . '-count' ) . '">' . $text . '</li>' . "\n";
+		$class = '';
+		$classes[] = $post_type . '-count';
+		$post_type_object = get_post_type_object( $post_type );
+		$menu_icon = isset( $post_type_object->menu_icon ) ? $post_type_object->menu_icon : null;
+
+		if ( 0 === strpos( $menu_icon, 'dashicons-' ) ) {
+			$classes[] = 'dashicons-before';
+			$classes[] = $menu_icon;
+		}
+
+		$class = join( ' ', sanitize_html_class( $classes ) );
+
+		return '<li class="' . esc_attr( $class ) . '">' . wp_kses_post( $text ) . '</li>' . "\n";
+	}
+
+	/**
+	 * Add post types icon styling to Dashboard page.
+	 *
+	 * To override the overly-specific core styles, we apply styles to ignore
+	 * the default circle, and with the classes added to the list item (not
+	 * anchor), get dashicons showing there instead.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return null Return early if style already added, or the Dashboard page.
+	 */
+	public function dashboard_css() {
+		static $added_style;
+
+		if ( $added_style ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+
+		if ( ! in_array( $screen->base, array( 'dashboard' ), true ) ) {
+			return;
+		}
+
+		// Remove default circle, and style dashicons we add via classes.
+		echo '<style type="text/css">#dashboard_right_now li.dashicons-before a:before, #dashboard_right_now li.dashicons span:before {content: none;}#dashboard_right_now li.dashicons-before:before {color: #82878c;margin: 0 5px 0 0;}</style>';
+
+		$added_style = true;
 	}
 }
