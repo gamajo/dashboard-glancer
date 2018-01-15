@@ -1,0 +1,26 @@
+{
+  "name": "gamajo/dashboard-glancer",
+  "description": "A class for your WordPress plugin, to make adding custom post type counts to the At a Glance dashboard widget considerably easier.",
+  "keywords": ["wordpress", "templates"],
+  "homepage": "https://github.com/GaryJones/Gamajo-Dashboard-Glancer",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Gary Jones",
+      "homepage": "https://gamajo.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/GaryJones/Gamajo-Dashboard-Glancer/issues"
+  },
+  "require": {
+    "php": ">=5.2.4"
+  },
+  "autoload": {
+    "classmap": ["class-gamajo-dashboard-glancer.php", "class-gamajo-dashboard-rightnow.php"]
+  },
+  "suggest": {
+    "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
+  }
+}
