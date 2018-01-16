@@ -2,7 +2,7 @@
 
 A class to copy into your WordPress plugin, to make adding custom post type counts to the _At a Glance_ dashboard widget considerably easier.
 
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/GaryJones/Gamajo-Dashboard-Glancer/badges/quality-score.png?s=543e04781b27f58b1e37ba742f760c0c5ba82297)](https://scrutinizer-ci.com/g/GaryJones/Gamajo-Dashboard-Glancer/)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/gamajo/dashboard-glancer/badges/quality-score.png?s=543e04781b27f58b1e37ba742f760c0c5ba82297)](https://scrutinizer-ci.com/g/gamajo/dashboard-glancer/)
 
 ## Description
 
