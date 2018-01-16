@@ -8,9 +8,11 @@ A class to copy into your WordPress plugin, to make adding custom post type coun
 
 WordPress 3.8 introduced the _At a Glance_ dashboard widget, as a replacement for the _Right Now_ widget. The new widget contains an action hook, `dashboard_glance_items`, which allows developers to insert extra list items into the widget. Although grabbing the number of entries of a certain post type, and maybe a specific status within that post type, and displaying within markup is not tricky, it can't be done as minimally as what this class allows. Add in the desire for wanting to include counts for multiple post types, or multiple statuses, and this class comes into its own. See the Usage section for how simple the code is.
 
-## Installation and Usage
+## Installation
 
 This isn't a WordPress plugin on its own, so the usual instructions don't apply. Instead:
+
+### Manually install class
 
 1. Copy [`class-gamajo-dashboard-glancer.php`](class-gamajo-dashboard-glancer.php) into your plugin. It can be into a file in the plugin root, or better, an `includes` directory.
 2. Ensure the class file is available to whichever code will be using it.
@@ -21,6 +23,13 @@ This isn't a WordPress plugin on its own, so the usual instructions don't apply.
       require plugin_dir_path( 'includes/class-gamajo-dashboard-glancer.php' );
   }
   ~~~
+
+or:
+
+### Install class via Composer
+1. Tell Composer to install this class as a dependency: `composer require gamajo/dashboard-glancer`
+2. Recommended: Install the Mozart package: `composer require coenjacobs/mozart --dev` and [configure it](https://github.com/coenjacobs/mozart#configuration).
+3. The class is now renamed to use your own prefix, to prevent collisions with other plugins bundling this class.
 
 ## Usage
 

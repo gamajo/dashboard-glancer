@@ -2,18 +2,18 @@
 /**
  * Gamajo Dashboard Glancer, for WP 3.7 and earlier.
  *
- * @package   Gamajo_Dashboard_Glancer
+ * @package   Gamajo\DashboardGlancer
  * @author    Gary Jones
- * @link      http://gamajo.com/dashboard-glancer
- * @copyright 2013 Gary Jones, Gamajo Tech
- * @license   GPL-2.0+
- * @version   1.0.2
+ * @link      https://github.com/gamajo/dashboard-glancer
+ * @copyright 2013 Gary Jones, Gamajo
+ * @license   GPL-2.0-or-later
+ * @version   1.0.4
  */
 
 /**
  * Easily add items to the Right Now Dashboard widget in WordPress 3.7-.
  *
- * @package Gamajo_Dashboard_Glancer
+ * @package Gamajo\DashboardGlancer
  * @author  Gary Jones
  */
 class Gamajo_Dashboard_RightNow extends Gamajo_Dashboard_Glancer {
