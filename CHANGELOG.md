@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Composer support.
+- Registered on Packagist: `https://packagist.org/packages/gamajo/dashboard-glancer`.
 
-_No changes._
+### Changed
+- Moved repo from `https://github.com/GaryJones/Gamajo-Dashboard-Glancer` to `https://github.com/gamajo/dashboard-glancer`.
 
 ## [1.0.3] - 2016-07-31
 
