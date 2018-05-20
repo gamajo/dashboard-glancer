@@ -52,7 +52,11 @@ class Gamajo_Dashboard_Glancer {
 	 * @return null Return early if action hook has already passed, or no valid
 	 *              post types were given.
 	 */
-	public function add( $post_types, $statuses = 'publish' ) {
+	public function add( $post_types, $statuses = null ) {
+		if ( null === $statuses ) {
+			$statuses = 'publish';
+		}
+
 		// If relevant output action hook has already passed, then no point in proceeding.
 		if ( did_action( 'dashboard_glance_items' ) ) {
 			_doing_it_wrong( __CLASS__, 'Trying to add At a Glance items to dashboard widget afterhook already fired', '1.0.0' );
@@ -102,7 +106,7 @@ class Gamajo_Dashboard_Glancer {
 	protected function unset_invalid_post_types( array $post_types ) {
 		foreach ( $post_types as $index => $post_type ) {
 			$post_type_object = get_post_type_object( $post_type );
-			if ( is_null( $post_type_object ) ) {
+			if ( null === $post_type_object ) {
 				unset( $post_types[ $index ] );
 			}
 		}
@@ -198,17 +202,16 @@ class Gamajo_Dashboard_Glancer {
 	 * @return string Markup for list item.
 	 */
 	protected function get_markup( $text, $post_type ) {
-		$class = '';
-		$classes[] = $post_type . '-count';
+		$classes[]        = $post_type . '-count';
 		$post_type_object = get_post_type_object( $post_type );
-		$menu_icon = isset( $post_type_object->menu_icon ) ? $post_type_object->menu_icon : null;
+		$menu_icon        = isset( $post_type_object->menu_icon ) ? $post_type_object->menu_icon : null;
 
 		if ( 0 === strpos( $menu_icon, 'dashicons-' ) ) {
 			$classes[] = 'dashicons-before';
 			$classes[] = $menu_icon;
 		}
 
-		$class = join( ' ', sanitize_html_class( $classes ) );
+		$class = implode( ' ', sanitize_html_class( $classes ) );
 
 		return '<li class="' . esc_attr( $class ) . '">' . wp_kses_post( $text ) . '</li>' . "\n";
 	}
@@ -233,7 +236,7 @@ class Gamajo_Dashboard_Glancer {
 
 		$screen = get_current_screen();
 
-		if ( ! in_array( $screen->base, array( 'dashboard' ), true ) ) {
+		if ( 'dashboard' !== $screen->base ) {
 			return;
 		}
 
